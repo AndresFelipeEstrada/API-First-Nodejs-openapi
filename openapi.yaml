@@ -5,7 +5,10 @@ info:
   description: API First
 
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:3000/v1
+    description: Version 1 de la API
+  - url: http://localhost:3000/v2
+    description: Version 2 de la API
 
 components:
   schemas:
