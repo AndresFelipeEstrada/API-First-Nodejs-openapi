@@ -1,8 +1,24 @@
 openapi: 3.1.1
 info:
-  title: API First
+  contact:
+    name: Andres Felipe Estrada Arias
+    url: https://github.com/AndresFelipeEstrada
+    email: andresfe1396@gmail.com
+  title: FakeAPI Store
   version: 1.0.0
-  description: API First
+  description: |
+    This is a sample FakeAPI Store Server based on the OpenAPI 3.X specification. You can find out more
+    about Swagger at https://swagger.io. In the third iteration of the pet store, we've switched to the design first
+    approach. You can now help us improve the API whether it's by making changes to the definition itself or to the code.
+    That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+tags:
+  - name: Users
+    description: Operations related to users
+  - name: Products
+    description: Operations related to products
 
 servers:
   - url: http://localhost:3000/v1
@@ -91,6 +107,8 @@ components:
 paths:
   /products:
     post:
+      tags:
+        - Products
       deprecated: false
       summary: Crear un nuevo products
       requestBody:
@@ -116,6 +134,8 @@ paths:
                   message:
                     type: string
     get:
+      tags:
+        - Products
       deprecated: false
       summary: Obtener lista de productos
       responses:
@@ -130,6 +150,8 @@ paths:
 
   /products/{id}:
     get:
+      tags:
+        - Products
       deprecated: false
       summary: Obtener un producto por ID
       parameters:
@@ -155,6 +177,8 @@ paths:
                   message:
                     type: string
     put:
+      tags:
+        - Products
       deprecated: false
       summary: Actualizar un producto por ID
       parameters:
@@ -186,6 +210,8 @@ paths:
                   message:
                     type: string
     delete:
+      tags:
+        - Products
       deprecated: false
       summary: Eliminar un producto por ID
       parameters:
@@ -220,6 +246,8 @@ paths:
                 $ref: "#/components/schemas/HelloResponse"
   /users:
     post:
+      tags:
+        - Users
       summary: Crea un nuevo usuario
       requestBody:
         required: true
@@ -236,6 +264,8 @@ paths:
                 $ref: "#/components/schemas/User"
   /users/{id}:
     get:
+      tags:
+        - Users
       summary: "Obtener un usuario por su ID"
       parameters:
         - in: path
@@ -260,6 +290,8 @@ paths:
                   message:
                     type: string
     post:
+      tags:
+        - Users
       deprecated: false
       summary: Actualizar un usuario por ID
       parameters:
