@@ -104,11 +104,22 @@ components:
           properties:
             id:
               type: string
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token for authentication
+security:
+  - JWT: []
+
 paths:
   /products:
     post:
       tags:
         - Products
+      security:
+        - JWT: []
       deprecated: false
       summary: Crear un nuevo products
       requestBody:
@@ -315,6 +326,56 @@ paths:
                 $ref: "#/components/schemas/User"
         "404":
           description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /auth/login:
+    post:
+      deprecated: false
+      tags:
+        - Users
+      summary: Autenticar usuario y obtener token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+                  minLength: 6
+      responses:
+        "200":
+          description: Autenticacion exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: JWT token para autenticacion
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      email:
+                        type: string
+        "401":
+          description: Credenciales invalidos
           content:
             application/json:
               schema:
